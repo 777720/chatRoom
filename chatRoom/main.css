@@ -1,0 +1,163 @@
+*{
+	padding: 0;
+	margin:0;
+}
+body,#cover{
+	width:100%;
+	height: 100%;
+	background: black;
+	box-sizing: border-box;
+}
+#main{
+	width:900px;
+	height:600px;
+	position: relative;
+	border: 2px solid white;
+	border-radius: 3px;
+	top:100px;
+	left:200px;
+}
+#left{
+	background: #D4E7F5;
+	width:700px;
+	height:100%;
+	border-left: 1px solid white;
+	float: left;
+}
+#left #aside_up{
+	width:100%;
+	height:500px;
+	overflow: auto;
+}
+#aside_up p{
+	position:relative;
+	padding: 16px 40px 16px 20px;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	border-radius:10px;
+	background-color: #AFD6E1;
+	margin-top: 10px;
+}
+
+#aside_up p:before{/*头像*/
+	position:absolute;
+	top:0px;
+	width:50px;
+	height:50px;
+	/*border-radius: 150px;*/
+	content: '';
+}
+#aside_up p:after{/*小尾巴*/
+	position:absolute;
+	content: '';
+	border-top: 15px solid #AFD6E1;
+}
+#aside_up p.right{
+	clear: both;
+	float: right;/*头像流动位置*/
+	margin-right: 80px;
+}
+#aside_up p.right:before{
+	right:-60px;
+	background:url(img/photo2.png) no-repeat;
+}
+#aside_up p.right:after{
+	border-right: 15px solid transparent;
+	right: -15px;
+}
+#aside_up p.left{
+	clear: both;
+	float:left;
+	margin-left: 80px;
+}
+#aside_up p.left:before{
+	left:-60px;
+	background: url(img/photo2.png) no-repeat;
+}
+#aside_up p.left:after{
+	border-left: 15px solid transparent;
+	left:-15px;
+}
+
+
+
+#aside_down input{
+	height:99px;
+	width:540px;
+	float: left;
+}
+#aside_down_right{
+	width:155px;
+	height: 100px;
+	float: right;
+	background: url(img/send.png) no-repeat;
+	background-size: 100% 100%;
+}
+#right{
+	float: right;
+	width:198px;
+	height:600px;
+	background: #8CC8D7;
+}
+#online{
+	width:198px;
+	height: 80px;
+	font-family: "微软雅黑";
+	font-size: 24px;
+	text-align: center;
+	line-height: 80px;
+}
+#member{
+	width:198px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size: 24px;
+	text-align: center;
+	line-height: 40px;
+	margin-bottom: 10px;
+	background: gray;
+	
+}
+
+#quit img{
+	position:absolute;
+	width:198px;
+	height:129px;
+	top: 500px;
+	/*background: url(img/quitbg.png) no-repeat;
+	background-size: 100% 100%;*/
+
+}
+#membership{
+	width:198px;
+	height:381px;
+	overflow: auto;
+}
+#membership p{
+	width:198px;
+	height:30px;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	line-height: 20px;
+	text-align: center;
+	border-bottom: 1px solid black;
+	background: blue;
+	padding-top: 10px;
+
+}
+#membership p:hover{
+	opacity: 0.6;
+}
+#membership p img{
+	width:30px;
+	height:30px;
+	position: absolute;
+	left: 720px;
+}
+.mem_pic {
+	margin-top: 10px;
+	width:30px;
+	height: 30px;
+	margin-right: 10px;	
+}
+

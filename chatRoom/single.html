@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>一对一聊天界面</title>
+	</head>
+	<body>
+		<h1>a与b聊天</h1>
+	</body>
+	<script type="text/javascript">
+	  var toname = sessionStorage.getItem("toname");
+	  var username = sessionStorage.getItem("name");
+	  document.getElementsByTagName("h1")[0].innerHTML = username + "与" + toname + "聊天进行中";
+	</script>
+</html>

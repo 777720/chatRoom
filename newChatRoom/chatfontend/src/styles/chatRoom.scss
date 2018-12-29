@@ -1,0 +1,85 @@
+.chatroom-container {
+  margin: 22px;
+  padding: 22px;
+}
+
+.chat-header {
+  min-height: 90px;
+  border: 2px solid #eee;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  text-align: left;
+  h3 {
+    margin-left: 22px;
+  }
+}
+.border-left {
+  border-left : 2px solid #eee;
+}
+.border-right {
+  border-right : 2px solid #eee;
+}
+.border-top {
+  border-top : 2px solid #eee;
+}
+
+.record-view {
+  min-height: 500px;
+}
+
+.chatroom-main {
+
+  display: flex;
+  flex-direction: row;
+  .chatview-left {
+    flex: 3;
+    .chatview-main {
+      height: 320px;
+      border-left : 2px solid #eee;
+      border-right : 2px solid #eee;
+      border-bottom : 2px solid #eee;
+      padding: 20px 10px 0px 10px;
+      overflow-y: auto;
+    }
+    .chatview-speakview {
+      border-top : 2px solid #eee;
+      border-left : 2px solid #eee;
+      border-right : 2px solid #eee;
+      border-bottom : 2px solid #eee;
+      border-bottom-left-radius: 12px;
+      padding: 12px 6px;
+
+      .chatview-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      textarea {
+        border: 0px;
+        height: 100px;
+        width: 100%;
+        resize: none;
+        outline: none;
+      }
+    }
+  }
+  .chatview-right {
+    flex: 1;
+    border-right : 2px solid #eee;
+    border-bottom : 2px solid #eee;
+    border-bottom-right-radius: 12px;
+  }
+}
+
+.btn {
+    width: 72px;
+    height: 25px;
+    float: right;
+    margin-right: 5px;
+    background-color: #805b6b;
+    border-radius: 3px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}

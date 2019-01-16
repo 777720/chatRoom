@@ -73,19 +73,20 @@
 
 .sevenmodal-enter {
   transform: scale(0);
-  -webkit-transform: scale(0);
 }
 
 .sevenmodal-enter-active {
   transform: scale(1.1);
-  -webkit-transform: scale(1.1);
   transition: all .2s linear;
-  -webkit-transition: all .2s linear;
+}
+.sevenmodal-enter-end {
+  transform: scale(1);
+  transition: all .1s linear;
 }
 
 
+
 .sevenmodal-leave {
-  
   transform: scale(1);
 }
 
@@ -108,9 +109,9 @@
   transition: opacity .2s ease-in;
 }
 
-/* .sevenmodal-mask-leave {
+.sevenmodal-mask-leave {
   opacity: .6;
-} */
+}
 
 .sevenmodal-mask-leaveactive {
   opacity: -1;

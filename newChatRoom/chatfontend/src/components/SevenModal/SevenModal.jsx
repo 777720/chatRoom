@@ -19,11 +19,9 @@ class SevenModal extends React.Component {
   // 每次接收props就根据父组件的状态更新modal中的visible状态，首次渲染不会调用
   componentWillReceiveProps(props) {
 
-    if(props.visible) {
       this.setState({
-        visible: true
+        visible: props.visible
       })
-    }
   }
 
   
@@ -31,19 +29,18 @@ class SevenModal extends React.Component {
   closeModal = () => {
     const { onClose } = this.props
     onClose && onClose()
-    this.setState({
-      visible: false
-    })
+    // this.setState({
+    //   visible: false
+    // })
   }
 
   confirmModal = () => {
     const { onConfirm } = this.props
     onConfirm && onConfirm()
 
-    this.setState({
-      visible: false
-    })
-    // this.leaveAnimate()
+    // this.setState({
+    //   visible: false
+    // })
   }
 
 
@@ -54,21 +51,27 @@ class SevenModal extends React.Component {
 
   render() {
     const { visible, classes } = this.state
+    const { title, children } = this.props
     return (
       <PortalWrapper>
         <SevenTransition
           visible={visible}
         >
-          <div className={`sevenmodal`}>
-            <div className="sevenmodal-title">这是modal标题</div>
-            <div className="sevenmodal-content">这是modal内容</div>
-            <div className="sevenmodal-operator">
-              <button className="sevenmodal-operator-close" onClick={this.closeModal}>取消</button>
-              <button className="sevenmodal-operator-confirm" onClick={this.confirmModal}>确认</button>
-            </div>
+            <div className={`sevenmodal`}>
 
-          </div>
-          <div className={`sevenmodal-mask`} onClick={this.maskClick}></div>
+              <div className="sevenmodal-title">{title}</div>
+              <div className="sevenmodal-content">
+                {
+                  children
+                }
+              </div>
+              <div className="sevenmodal-operator">
+                <button className="sevenmodal-operator-close" onClick={this.closeModal}>取消</button>
+                <button className="sevenmodal-operator-confirm" onClick={this.confirmModal}>确认</button>
+              </div>
+
+            </div>
+            <div className={`sevenmodal-mask`} onClick={this.maskClick}></div>
         </SevenTransition>
       </PortalWrapper> 
     )
@@ -78,6 +81,7 @@ class SevenModal extends React.Component {
   
 SevenModal.defaultProps = {}
 SevenModal.propTypes = {
+  title: PropTypes.string,
   visible: PropTypes.bool,
   onConfirm: PropTypes.func,
   onClose: PropTypes.func

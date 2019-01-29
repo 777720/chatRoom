@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import TalkView from './TalkView'
 
 
 class ChatRecordView extends React.Component {
@@ -8,6 +9,8 @@ class ChatRecordView extends React.Component {
 
   render() {
     const { messageArr } = this.props
+    const username = window.localStorage.getItem('username')
+    console.log('messageArr', messageArr)
     return (
       <div className="border-left border-right record-view">
         <div>聊天记录</div>
@@ -15,9 +18,11 @@ class ChatRecordView extends React.Component {
         {
           messageArr.map((item, index) => {
             return (
-              <div key={index}>
-                {item.userName}: {item.message }
-              </div>
+              <TalkView key={index} 
+                position={username === item.userName ? 'right' : 'left' }
+                userInfo={item}
+                viewContent={item.message}
+              />
             )
           })
         }

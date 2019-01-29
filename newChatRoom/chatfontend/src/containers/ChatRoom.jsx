@@ -11,7 +11,10 @@ import LoginUserView from '../components/LoginUsersView'
 import ChatRecordView from '../components/ChatRecordView'
 import SpeakView from '../components/SpeakView'
 import LoginModal from '../components/LoginModal'
-import SevenModal from '../components/SevenModal/SevenModal'
+
+
+import TalkView from '../components/TalkView'
+
 
 const socket = require('socket.io-client')('http://localhost:3077');
 
@@ -23,37 +26,36 @@ class ChatRoom extends React.Component {
       showLoginModal: true,
       userArrs: [],
       messageArr: [],
-      showTestModal: false
+      showTestModal: false,
+      loginStatus: false,
     }
   }
 
   componentDidMount() {
-
-
-    // this.getUserNameByCache()
     this.socketConfig()
-
-    
   }
 
   socketConfig = () => {
     socket.on('login', (data) => {
-      console.log('login ----->', data)
+      console.log('userArr', data);
+
       this.setState({
         showLoginModal: false,
-        userArrs: data
+        userArrs: data,
+        loginStatus: true
       })
     })
     socket.on('new message', (data) => {
-      console.log('new message ------>', data)
 
       const { messageArr } = this.state
       const userName = window.localStorage.getItem('username')
+      const avtornum = window.localStorage.getItem('avtornum')
       const _msgArr = _.concat([], messageArr)
 
       const msgItem = {
         userName: data.userName,
         message: data.message,
+        avtornum: data.avtornum
       }
 
       _msgArr.push(msgItem)
@@ -77,61 +79,48 @@ class ChatRoom extends React.Component {
 
  
 
-  handleLoginFn = (username) => {
-    socket.emit('add user', username)
-    window.localStorage.setItem('username', username)
+  handleLoginFn = (username, avtornum) => {
+    const userInfo = { username, avtornum }
+    socket.emit('add user', userInfo)
+    console.log('userInfo',userInfo);
+    window.localStorage.setItem('username', userInfo.username)
+    window.localStorage.setItem('avtornum', userInfo.avtornum)
   }
 
   handleSendNewMessage = (message) => {
     const userName = window.localStorage.getItem('username')
-    socket.emit('new message', { message, userName })
+    const avtornum = window.localStorage.getItem('avtornum')
+    socket.emit('new message', { message, userName, avtornum })
   }
 
-  handleCloseFn = () => {
-    this.setState({
-      showTestModal: false,
-    })
-  }
-
-  handleConfirmFn = () => {
-    this.setState({
-      showTestModal: false,
-    })
-  }
+  
 
   render() {
-    const { showLoginModal, showTestModal, userArrs, messageArr } = this.state
+    const { showLoginModal, showTestModal, userArrs, messageArr, loginStatus } = this.state
     return (
       <Provider store={store}>
-          <div className="chatroom-container">
-            <div className="chat-header">
-              <h3>聊天室</h3>
-            </div>
-            <div className="chatroom-main">
-              <div className="chatview-left">
-                <ChatRecordView 
-                  messageArr={messageArr}
-                />
-                <SpeakView 
-                  sendMessageFn={this.handleSendNewMessage}
-                />
-              </div>
-              <div className="chatview-right"><LoginUserView users={userArrs} /></div>
-
-              
-            </div>
-
-            <button onClick={() => { this.setState({ showTestModal: true }) }}>open test</button>
-            {
-              // showLoginModal ? <LoginModal loginFn={this.handleLoginFn} /> : ''
-
-              <SevenModal 
-                visible={showTestModal} 
-                onClose={this.handleCloseFn}
-                onConfirm={this.handleConfirmFn}
-              />  
-            }
+        <div className="chatroom-container">
+          <div className="chat-header">
+            <h3>聊天室</h3>
           </div>
+          <div className="chatroom-main">
+            <div className="chatview-left">
+              <ChatRecordView 
+                messageArr={messageArr}
+              />
+              <SpeakView 
+                sendMessageFn={this.handleSendNewMessage}
+                canInput={loginStatus}
+              />
+            </div>
+            <div className="chatview-right"><LoginUserView users={userArrs} /></div>
+
+            
+          </div>
+
+          <LoginModal show={showLoginModal} loginFn={this.handleLoginFn} /> 
+
+        </div>
       </Provider>
     )
   }

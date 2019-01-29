@@ -24,23 +24,35 @@ class SpeakView extends React.Component {
   }
   render() {
     const { currentMessage } = this.state
+    const { canInput } = this.props
+    
     return (
       <div className="chatview-speakview">
-        <textarea
-          onChange={this.onInputChange}
-          value={currentMessage}
-        />
-        <div className="chatview-btn">
-          <button className="btn" >关闭</button>
-          <button className="btn" onClick={this.onSendMessage}>发送</button>
-        </div>
+        { 
+          canInput ? 
+            <div>
+              <textarea
+                onChange={this.onInputChange}
+                value={currentMessage}
+              />
+              <div className="chatview-btn">
+                <button className="btn" >关闭</button>
+                <button className="btn" onClick={this.onSendMessage} disabled={false} >发送</button>
+              </div>
+            </div> : 'login'
+        }
+        
       </div>
     )
+   
   }
 }
 
-SpeakView.defaultProps = {}
+SpeakView.defaultProps = {
+  canInput: true
+}
 SpeakView.propTypes = {
+  canInput: PropTypes.bool,
   sendMessageFn: PropTypes.func,
 }
 

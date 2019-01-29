@@ -7,6 +7,7 @@ class SevenTransition extends React.Component {
     modalClasses: '',
     maskClasses: 'test',
     currrentVisable: false,
+    renderFlag: true,
   } 
 
 
@@ -17,13 +18,17 @@ class SevenTransition extends React.Component {
       return
     }
     if (!nextProps.visible) {
-      console.log('ebter leaveAnimation');
       this.leaveAnimation(nextProps.visible)
     } else {
-      console.log('enter enterAnimation');
-      this.enterAnimation(nextProps.visible)
+      if (this.props.visible) {
+        return 
+      } else {
+        this.enterAnimation(nextProps.visible)
+      }
     }
   }
+
+
   
 
   enterAnimation(status) {
@@ -60,7 +65,7 @@ class SevenTransition extends React.Component {
     const initTimeout = setTimeout(() => {
       this.setState({
         modalClasses: '',
-        maskClasses: ''
+        maskClasses: '',
       })
       clearTimeout(initTimeout)
     }, enterActiveTime + enterActiveTime + 10)
@@ -117,14 +122,14 @@ class SevenTransition extends React.Component {
         return (
           React.cloneElement(
             item,
-            { className: `${oldClassname} ${modalClasses}` }
+            { className: `${oldClassname} ${modalClasses}`, key: index }
           )
         )
       } else if (index === 1) {
         return (
           React.cloneElement(
             item,
-            { className: `${oldClassname} ${maskClasses}` }
+            { className: `${oldClassname} ${maskClasses}`, key: index }
           )
         )
       } else {
@@ -140,7 +145,7 @@ class SevenTransition extends React.Component {
 
   render() {
     const { currrentVisable } = this.state
-    return currrentVisable && this.cloneChildren()
+    return currrentVisable ?  this.cloneChildren() : ''
     
   }
 }
